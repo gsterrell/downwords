@@ -1,0 +1,42 @@
+# Project: Downwards
+# Makefile created by Dev-C++ 4.9.9.2
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = 
+OBJ  = letter.o functions.o globals.o main.o timer.o $(RES)
+LINKOBJ  = letter.o functions.o globals.o main.o timer.o $(RES)
+LIBS =  -L"C:/Dev-Cpp/lib" -L"C:/Dev-Cpp/SDL-1.2.13/lib" -lmingw32 -lSDLmain -lSDL -lSDL_image  
+INCS =  -I"C:/Dev-Cpp/include" 
+CXXINCS =  -I"C:/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"C:/Dev-Cpp/include/c++/3.4.2/backward"  -I"C:/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"C:/Dev-Cpp/include/c++/3.4.2"  -I"C:/Dev-Cpp/include"  -I"C:/Dev-Cpp/SDL-1.2.13/include" 
+BIN  = Downwards.exe
+CXXFLAGS = $(CXXINCS)  
+CFLAGS = $(INCS)  
+RM = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before Downwards.exe all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o "Downwards.exe" $(LIBS)
+
+letter.o: letter.cpp
+	$(CPP) -c letter.cpp -o letter.o $(CXXFLAGS)
+
+functions.o: functions.cpp
+	$(CPP) -c functions.cpp -o functions.o $(CXXFLAGS)
+
+globals.o: globals.cpp
+	$(CPP) -c globals.cpp -o globals.o $(CXXFLAGS)
+
+main.o: main.cpp
+	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
+
+timer.o: timer.cpp
+	$(CPP) -c timer.cpp -o timer.o $(CXXFLAGS)
