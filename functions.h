@@ -14,7 +14,7 @@
 SDL_Surface *load_image( char* filename );
 
 //Surface blitter, applies the selected surface
-void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip = NULL);
+void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip);
 
 //Initialization
 bool init();

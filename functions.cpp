@@ -39,7 +39,7 @@ SDL_Surface *load_image( char* filename )
     return optimizedImage;
 }
 
-void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip = NULL)
+void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip)
 {
     //Holds offsets
     SDL_Rect offset;
@@ -101,8 +101,8 @@ void set_letters()
         
     letters[LETTER_B].x = 5;
     letters[LETTER_B].y = 5;
-    letters[LETTER_B].w = 200;
-    letters[LETTER_B].h = 200;
+    letters[LETTER_B].w = LETTER_WIDTH;
+    letters[LETTER_B].h = LETTER_HEIGHT;
 }
 
 void clean_up()

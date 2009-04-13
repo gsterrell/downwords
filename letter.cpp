@@ -143,7 +143,7 @@ void Letter::move()
 void Letter::show()
 {
     //Show the letter
-    apply_surface( box.x, box.y, letterSheet, screen);
+    apply_surface( box.x, box.y, letterSheet, screen, NULL);
 }
 
 //Destructor.  Currently not being used.
