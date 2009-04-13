@@ -11,21 +11,20 @@
 #include "functions.h"
 #include "globals.h"
 
-Letter::Letter(int x, int y, int w, int h, bool click )
+Letter::Letter()
 {
     //Set the button's attributes
-    box.x = x;
-    box.y = y;
-    box.w = w;
-    box.h = h;
-    clicked = click;
+    box.x = 0;
+    box.y = 0;
+    box.w = LETTER_WIDTH;
+    box.h = LETTER_HEIGHT;
     
-    //Set the default sprite
-    clip = &clips;
+    //default sprite for testing
+    letter = &letters[LETTER_A];
     
     //Initialize the velocity
     xVel = 0;
-    yVel = 1;
+    yVel = 2;
 }
 
 void Letter::handle_input()
@@ -34,8 +33,7 @@ void Letter::handle_input()
     //The mouse offsets 
     int x = 0, y = 0; 
     
-    //If the mouse is being moved
-    //BLAYNE:  This is the one that I have been focusing on the most.  
+    //If the mouse is being moved 
     if( event.type == SDL_MOUSEMOTION )
     {
         x = event.motion.x;
@@ -45,6 +43,18 @@ void Letter::handle_input()
         { 
             box.x = x;
             box.y = y;
+            yVel = 0;
+            
+            if (event.motion.x > (SCREEN_WIDTH - LETTER_WIDTH))
+            {
+                //move back
+                box.x = SCREEN_WIDTH - LETTER_WIDTH;        
+            }
+            if (event.motion.y > (SCREEN_HEIGHT - LETTER_HEIGHT))
+            {
+                //move back
+                box.y = SCREEN_HEIGHT - LETTER_HEIGHT;  
+            }
         }
     }
     
@@ -77,8 +87,8 @@ void Letter::handle_input()
             y = event.button.y;
             
             clicked = false;
-            
-        } 
+            yVel = 2;
+        }
     } 
     
     //If a key was pressed
@@ -87,10 +97,10 @@ void Letter::handle_input()
         //Adjust the velocity
         switch( event.key.keysym.sym )
         {
-            case SDLK_UP: yVel -= DOT_HEIGHT / 2; break;
-            case SDLK_DOWN: yVel += DOT_HEIGHT / 2; break;
-            case SDLK_LEFT: xVel -= DOT_WIDTH / 2; break;
-            case SDLK_RIGHT: xVel += DOT_WIDTH / 2; break;    
+            case SDLK_UP: yVel -= LETTER_HEIGHT / 2; break;
+            case SDLK_DOWN: yVel += LETTER_HEIGHT / 2; break;
+            case SDLK_LEFT: xVel -= LETTER_WIDTH / 2; break;
+            case SDLK_RIGHT: xVel += LETTER_WIDTH / 2; break;    
         }
     }
     //If a key was released
@@ -99,45 +109,45 @@ void Letter::handle_input()
         //Adjust the velocity
         switch( event.key.keysym.sym )
         {
-            case SDLK_UP: yVel += DOT_HEIGHT / 2; break;
-            case SDLK_DOWN: yVel -= DOT_HEIGHT / 2; break;
-            case SDLK_LEFT: xVel += DOT_WIDTH / 2; break;
-            case SDLK_RIGHT: xVel -= DOT_WIDTH / 2; break;    
+            case SDLK_UP: yVel += LETTER_HEIGHT / 2; break;
+            case SDLK_DOWN: yVel -= LETTER_HEIGHT / 2; break;
+            case SDLK_LEFT: xVel += LETTER_WIDTH / 2; break;
+            case SDLK_RIGHT: xVel -= LETTER_WIDTH / 2; break;    
         }        
     }
 }
 
 void Letter::move()
 {
-    //Move the dot left or right
-    x += xVel;
+    //Move the letter left or right
+    box.x += xVel;
     
-    //If the dot went too far to the left or right
-    if( ( x < 0 ) || ( x + DOT_WIDTH > SCREEN_WIDTH ) )
+    //If the letter went too far to the left or right
+    if( ( box.x < 0 ) || ( box.x + LETTER_WIDTH > SCREEN_WIDTH ) )
     {
         //move back
-        x -= xVel;    
+        box.x -= xVel;    
     }
     
-    //Move the dot up or down
-    y += yVel;
+    //Move the letter up or down
+    box.y += yVel;
     
-    //If the dot went too far up or down
-    if( ( y < 0 ) || ( y + DOT_HEIGHT > SCREEN_HEIGHT ) )
+    //If the letter went too far up or down
+    if( ( box.y < 0 ) || ( box.y + LETTER_HEIGHT > SCREEN_HEIGHT ) )
     {
         //move back
-        y -= yVel;  
+        box.y -= yVel;  
     }
 }
 
 void Letter::show()
 {
-    //Show the dot
-    apply_surface( x, y, letter, screen, clip );
+    //Show the letter
+    apply_surface( box.x, box.y, letterSheet, screen);
 }
 
 //Destructor.  Currently not being used.
 Letter::~Letter()
 {
-    SDL_FreeSurface( letter);
+    SDL_FreeSurface(letterSheet);
 }

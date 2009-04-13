@@ -9,11 +9,12 @@
 #include "SDL/SDL.h"
 
 //The surfaces
-extern SDL_Surface *letter;
+extern SDL_Surface *letterSheet;
 extern SDL_Surface *screen;
 
-//Clips for letters
-extern SDL_Rect clips;
+//Hold the letters
+extern SDL_Rect *letter;
+extern SDL_Rect letters[];
 
 //The event structure
 extern SDL_Event event;

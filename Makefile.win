@@ -4,7 +4,7 @@
 CPP  = g++.exe
 CC   = gcc.exe
 WINDRES = windres.exe
-RES  = 
+RES  = Downwards_private.res
 OBJ  = letter.o functions.o globals.o main.o timer.o $(RES)
 LINKOBJ  = letter.o functions.o globals.o main.o timer.o $(RES)
 LIBS =  -L"C:/Dev-Cpp/lib" -L"C:/Dev-Cpp/SDL-1.2.13/lib" -lmingw32 -lSDLmain -lSDL -lSDL_image  
@@ -40,3 +40,6 @@ main.o: main.cpp
 
 timer.o: timer.cpp
 	$(CPP) -c timer.cpp -o timer.o $(CXXFLAGS)
+
+Downwards_private.res: Downwards_private.rc 
+	$(WINDRES) -i Downwards_private.rc --input-format=rc -o Downwards_private.res -O coff 

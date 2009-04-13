@@ -8,13 +8,13 @@
 //The headers
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
-#include <string>
+//#include <string>
 
 //File Loader, handles the input of files into the program
-SDL_Surface *load_image( std::string filename );
+SDL_Surface *load_image( char* filename );
 
 //Surface blitter, applies the selected surface
-void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip = NULL );
+void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip = NULL);
 
 //Initialization
 bool init();
@@ -22,9 +22,9 @@ bool init();
 //File loading
 bool load_files();
 
+void set_letters();
+
 //Clean up
 void clean_up();
-
-void set_clip();
 
 #endif

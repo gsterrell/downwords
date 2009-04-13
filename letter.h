@@ -17,14 +17,11 @@ class Letter
     //The attributes of the letter
     SDL_Rect box;
     
-    //The part of the button sprite sheet that will be shown
-    SDL_Rect* clip;
-    
     bool clicked;
     
     public:
     //Initializes the variables
-    Letter(int, int, int, int, bool);
+    Letter();
     
     //Takes key presses and adjusts the letter's velocity
     void handle_input();

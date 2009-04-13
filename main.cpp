@@ -16,7 +16,7 @@ int main( int argc, char* args[] )
     bool quit = false;
     
     //The dot that will be used
-    Letter myLetter(0,0,30,30, false);
+    Letter myLetter;
     
     //The frame rate regulator
     Timer fps;
