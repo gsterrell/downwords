@@ -10,6 +10,7 @@
 #include "letter.h"
 #include "functions.h"
 #include "globals.h"
+#include "level.h"
 
 Letter::Letter()
 {

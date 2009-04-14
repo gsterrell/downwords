@@ -8,7 +8,6 @@
 //The headers
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
-//#include <string>
 
 //File Loader, handles the input of files into the program
 SDL_Surface *load_image( char* filename );
@@ -20,7 +19,7 @@ void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination,
 bool init();
 
 //File loading
-bool load_files();
+//bool load_files();
 
 void set_letters();
 

@@ -39,7 +39,7 @@ SDL_Surface *load_image( char* filename )
     return optimizedImage;
 }
 
-void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip)
+void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip = NULL)
 {
     //Holds offsets
     SDL_Rect offset;
@@ -77,21 +77,6 @@ bool init()
     return true;
 }
 
-bool load_files()
-{
-    //Load the letter image
-    letterSheet = load_image( "a.png" );
-    
-    //If there was a problem in loading the dot
-    if( letterSheet == NULL )
-    {
-        return false;    
-    }
-    
-    //If everything loaded fine
-    return true;
-}
-
 void set_letters()
 {
     letters[LETTER_A].x = 0;
@@ -101,15 +86,12 @@ void set_letters()
         
     letters[LETTER_B].x = 5;
     letters[LETTER_B].y = 5;
-    letters[LETTER_B].w = LETTER_WIDTH;
-    letters[LETTER_B].h = LETTER_HEIGHT;
+    letters[LETTER_B].w = 200;
+    letters[LETTER_B].h = 200;
 }
 
 void clean_up()
 {
-    //Free the surface
-    SDL_FreeSurface( letterSheet );
-    
     //Quit SDL
     SDL_Quit();
 }

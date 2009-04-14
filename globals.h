@@ -16,6 +16,9 @@ extern SDL_Surface *screen;
 extern SDL_Rect *letter;
 extern SDL_Rect letters[];
 
+//Holds the backgrounds
+extern SDL_Surface *background1;
+
 //The event structure
 extern SDL_Event event;
 

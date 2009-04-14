@@ -13,5 +13,8 @@ SDL_Surface *screen = NULL;
 SDL_Rect *letter = NULL;
 SDL_Rect letters[ 26 ];
 
+//Holds the backgrounds
+SDL_Surface *background1 = NULL;
+
 //The event structure
 SDL_Event event;

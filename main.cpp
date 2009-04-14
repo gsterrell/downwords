@@ -9,6 +9,7 @@
 #include "functions.h"
 #include "globals.h"
 #include "timer.h"
+#include "level.h"
 
 int main( int argc, char* args[] )
 {
@@ -28,7 +29,8 @@ int main( int argc, char* args[] )
     }
     
     //Load the files
-    if( load_files() == false )
+    //if( load_files() == false )
+    if ( level_init() == false )
     {
         return 1;
     }
@@ -59,6 +61,8 @@ int main( int argc, char* args[] )
         //Fill the screen white
         SDL_FillRect( screen, &screen->clip_rect, SDL_MapRGB( screen->format, 0xFF, 0xFF, 0xFF ) );
         
+        level_files();
+        
         //Show the letter on the screen
         myLetter.show();
         
@@ -74,6 +78,8 @@ int main( int argc, char* args[] )
             SDL_Delay( ( 1000 / FRAMES_PER_SECOND ) - fps.get_ticks() );
         }
     }
+    
+    level_end();
         
     //Clean up
     clean_up();
