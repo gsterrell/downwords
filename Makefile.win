@@ -4,42 +4,51 @@
 CPP  = g++.exe
 CC   = gcc.exe
 WINDRES = windres.exe
-RES  = Downwards_private.res
-OBJ  = letter.o functions.o globals.o main.o timer.o $(RES)
-LINKOBJ  = letter.o functions.o globals.o main.o timer.o $(RES)
+RES  = tmp/Downwards_private.res
+OBJ  = tmp/corpus.o tmp/functions.o tmp/globals.o tmp/letter.o tmp/letterspace.o tmp/level.o tmp/main.o tmp/timer.o $(RES)
+LINKOBJ  = tmp/corpus.o tmp/functions.o tmp/globals.o tmp/letter.o tmp/letterspace.o tmp/level.o tmp/main.o tmp/timer.o $(RES)
 LIBS =  -L"C:/Dev-Cpp/lib" -L"C:/Dev-Cpp/SDL-1.2.13/lib" -lmingw32 -lSDLmain -lSDL -lSDL_image  
 INCS =  -I"C:/Dev-Cpp/include" 
 CXXINCS =  -I"C:/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"C:/Dev-Cpp/include/c++/3.4.2/backward"  -I"C:/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"C:/Dev-Cpp/include/c++/3.4.2"  -I"C:/Dev-Cpp/include"  -I"C:/Dev-Cpp/SDL-1.2.13/include" 
-BIN  = Downwards.exe
+BIN  = bin/Downwards.exe
 CXXFLAGS = $(CXXINCS)  
 CFLAGS = $(INCS)  
 RM = rm -f
 
 .PHONY: all all-before all-after clean clean-custom
 
-all: all-before Downwards.exe all-after
+all: all-before bin/Downwards.exe all-after
 
 
 clean: clean-custom
 	${RM} $(OBJ) $(BIN)
 
 $(BIN): $(OBJ)
-	$(CPP) $(LINKOBJ) -o "Downwards.exe" $(LIBS)
+	$(CPP) $(LINKOBJ) -o "bin\Downwards.exe" $(LIBS)
 
-letter.o: letter.cpp
-	$(CPP) -c letter.cpp -o letter.o $(CXXFLAGS)
+tmp/corpus.o: src/corpus.cpp
+	$(CPP) -c src/corpus.cpp -o tmp/corpus.o $(CXXFLAGS)
 
-functions.o: functions.cpp
-	$(CPP) -c functions.cpp -o functions.o $(CXXFLAGS)
+tmp/functions.o: src/functions.cpp
+	$(CPP) -c src/functions.cpp -o tmp/functions.o $(CXXFLAGS)
 
-globals.o: globals.cpp
-	$(CPP) -c globals.cpp -o globals.o $(CXXFLAGS)
+tmp/globals.o: src/globals.cpp
+	$(CPP) -c src/globals.cpp -o tmp/globals.o $(CXXFLAGS)
 
-main.o: main.cpp
-	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
+tmp/letter.o: src/letter.cpp
+	$(CPP) -c src/letter.cpp -o tmp/letter.o $(CXXFLAGS)
 
-timer.o: timer.cpp
-	$(CPP) -c timer.cpp -o timer.o $(CXXFLAGS)
+tmp/letterspace.o: src/letterspace.cpp
+	$(CPP) -c src/letterspace.cpp -o tmp/letterspace.o $(CXXFLAGS)
 
-Downwards_private.res: Downwards_private.rc 
-	$(WINDRES) -i Downwards_private.rc --input-format=rc -o Downwards_private.res -O coff 
+tmp/level.o: src/level.cpp
+	$(CPP) -c src/level.cpp -o tmp/level.o $(CXXFLAGS)
+
+tmp/main.o: src/main.cpp
+	$(CPP) -c src/main.cpp -o tmp/main.o $(CXXFLAGS)
+
+tmp/timer.o: src/timer.cpp
+	$(CPP) -c src/timer.cpp -o tmp/timer.o $(CXXFLAGS)
+
+tmp/Downwards_private.res: Downwards_private.rc 
+	$(WINDRES) -i Downwards_private.rc --input-format=rc -o tmp/Downwards_private.res -O coff 
